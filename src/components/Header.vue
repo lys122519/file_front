@@ -2,7 +2,7 @@
 
   <div class="container">
     <div style="flex: 1">
-      <span :class="collapseBtnClass" style="cursor: pointer;font-size: 18px" @click="isCollapse"></span>
+      <span :class="collapseBtnClass" style="cursor: pointer;font-size: 18px" @click="collapse"></span>
 
       <el-breadcrumb separator="/" style="display: inline-block ;margin-left: 10px;cursor: pointer">
         <el-breadcrumb-item :to="'/'">首页</el-breadcrumb-item>
@@ -20,8 +20,12 @@
 
       <el-dropdown-menu slot="dropdown" style="width: 100px;text-align: center">
 
+        <el-dropdown-item style="font-size: 14px; padding: 5px 0">
+          <router-link to="/password" tag="password">修改密码</router-link>
+        </el-dropdown-item>
+
         <el-dropdown-item style="font-size: 14px;padding: 5px 0">
-          <router-link to="/" tag="person">
+          <router-link to="/person" tag="person">
             <span>个人信息</span>
           </router-link>
         </el-dropdown-item>
@@ -42,13 +46,15 @@ export default {
   name: 'Header',
   props: {
     collapseBtnClass: String,
-    isCollapse: Boolean,
+
+    //从Manage接收的user对象
     user: Object
     // currentPathName:''
   },
   computed: {
     currentPathName() {
-      return this.$store.state.currentPathName//需要监听的数据
+      //需要监听的数据
+      return this.$store.state.currentPathName
     }
   },
   data() {
@@ -58,6 +64,10 @@ export default {
 
   },
   methods: {
+    collapse() {
+      // this.$parent.$parent.$parent.$parent.collapse()  // 通过4个 $parent 找到父组件，从而调用其折叠方法
+      this.$emit('asideCollapse')
+    },
     logout() {
       this.$store.commit('logout')
       this.$message.success('退出成功')

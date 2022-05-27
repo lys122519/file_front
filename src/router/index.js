@@ -38,7 +38,7 @@ const routes = [
       },
       {
         path: 'articleDetail', name: 'ArticleDetail', meta: {}, component: () => import('../views/front/ArticleDetail')
-      },
+      }
     ]
   }
 ]
@@ -69,7 +69,8 @@ export const setRouters = () => {
       const manageRoute = {
         path: '/', name: 'Manage', component: () => import('../views/Manage.vue'), redirect: '/home', children: [
           //写固定路由
-          { path: 'person', name: '个人信息', component: () => import('../views/Person.vue') }
+          { path: 'person', name: '个人信息', component: () => import('../views/Person.vue') },
+          { path: 'password', name: '修改密码', component: () => import('../views/Password.vue') }
         ]
       }
       const menus = JSON.parse(storeMenus)
