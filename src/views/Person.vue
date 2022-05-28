@@ -99,18 +99,19 @@ export default {
     },
     //上传头像
     handleAvatarSuccess(val) {
+      this.$message.success('上传成功')
       this.form.avatarUrl = val
     },
     //头像预处理
     beforeAvatarUpload(avatar) {
       //文件类型
-      const isJPEG = avatar.type === 'image/jpeg'
-      const isJPG = avatar.type === 'image/jpg'
-      const isPNG = avatar.type === 'image/png'
+      // const isJPEG = avatar.type === 'image/jpeg'
+      const isJPG = avatar.type === 'image/jpeg'
+
+      // const isPNG = avatar.type === 'image/png'
       //文件大小
       const isLt2M = avatar.size / 1024 / 1024 < 2
-
-      if (!isJPG || !isJPEG || !isPNG) {
+      if (!isJPG) {
         this.$message.error('上传头像图片只能是 JPG 格式!')
       }
       if (!isLt2M) {
